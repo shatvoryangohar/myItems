@@ -20,8 +20,7 @@
 <%
     User user = (User) session.getAttribute("user");
     List<Category> categories = (List<Category>) request.getAttribute("categories");
-    List<Item> items = (List<Item>) request.getAttribute("items");
-    Picture picture = (Picture) request.getAttribute("picture");
+    Item item = (Item) request.getAttribute("item");
 %>
 
 <div style="margin: 0 auto;width: 1000px;height: 1000px;border: 1px solid black">
@@ -46,23 +45,32 @@
     </div>
     <div>
 
-        <% for (Item item : items) {%>
         <a href="/singleItem?id=<%=item.getId()%>">
-            <div style="width: 105px;float: left">
+            <div style="width: 500px;float: left">
+                <%
+                    for (Picture picture : item.getPictureList()) {%>
+
                 <div>
-                    <%if (item.getPictureList() != null && !item.getPictureList().isEmpty() && item.getPictureList().get(0).getPicUrl() != null && !item.getPictureList().get(0).getPicUrl().equals("")) {%>
-                    <img src="/getImage?pic_url=<%=item.getPictureList().get(1).getPicUrl()%>" width="100"/>
+                    <%if (picture.getPicUrl() != null && !picture.getPicUrl().equals("")) {%>
+                    <img src="/getImage?pic_url=<%=picture.getPicUrl()%>" width="500"/>
 
                     <%} else {%>
-                    <img src="/image/img.png" width="100">
+                    <img src="/image/img.png" width="500">
                     <%}%>
                 </div>
+                <% }%>
+
                 <div>
                     <span><%=item.getTitle()%>|<%=item.getPrice()%></span>
                 </div>
+                <span><%=item.getDescription()%></span>
+                <div>
+                    User
+                    Info:<%=item.getUser().getName()%><%=item.getUser().getSurname()%><%=item.getUser().getPhone()%>
+                </div>
             </div>
         </a>
-        <% }%>
+
     </div>
 </div>
 </body>

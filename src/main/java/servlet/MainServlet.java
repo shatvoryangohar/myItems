@@ -2,6 +2,7 @@ package servlet;
 
 import manager.CategoryManager;
 import manager.ItemManager;
+import manager.PictureManager;
 import model.Item;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,6 @@ public class MainServlet extends HttpServlet {
 
     private ItemManager itemManager = new ItemManager();
     private CategoryManager categoryManager = new CategoryManager();
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String catIdStr = req.getParameter("cat_id");

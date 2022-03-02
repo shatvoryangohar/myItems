@@ -13,6 +13,7 @@ public class ItemManager {
     private UserManager userManager = new UserManager();
     private CategoryManager categoryManager = new CategoryManager();
     private PictureManager pictureManager = new PictureManager();
+
     public void addItem(Item item) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT into item(title,price,description,user_id,category_id)VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -121,6 +122,7 @@ public class ItemManager {
                         .description(resultSet.getString(4))
                         .user(userManager.getUserById(resultSet.getInt(5)))
                         .category(categoryManager.getCategoryById(resultSet.getInt(6)))
+                        .pictureList(pictureManager.getPictureByItemId(resultSet.getInt(1)))
                         .build());
             }
 
@@ -145,6 +147,7 @@ public class ItemManager {
                         .description(resultSet.getString(4))
                         .user(userManager.getUserById(resultSet.getInt(5)))
                         .category(categoryManager.getCategoryById(resultSet.getInt(6)))
+                       .pictureList(pictureManager.getPictureByItemId(resultSet.getInt(1)))
                         .build());
             }
 
